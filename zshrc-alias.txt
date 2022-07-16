@@ -5,6 +5,9 @@ alias mm="make main && ./main"
 alias mmi="make main && ./main < input"
 alias mmid="make main && ./main < input | diff -c - output"
 alias gemp="touch main.cpp input output"
+
+alias ls='exa --icons'
+
 alias g=git
 alias ga='git add'
 alias gaa='git add --all'
