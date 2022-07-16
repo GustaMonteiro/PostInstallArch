@@ -29,6 +29,7 @@ LISTA_PROGRAMAS=(
   gimp
   visual-studio-code-bin
   obs-studio
+  notion-app
 )
 
 LISTA_PACOTES_CARGO=(
