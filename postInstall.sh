@@ -23,6 +23,12 @@ LISTA_PROGRAMAS=(
   ttf-meslo-nerd-font-powerlevel10k
   powerline-fonts
   awesome-terminal-fonts
+  discord
+  zoom
+  vlc
+  gimp
+  visual-studio-code-bin
+  obs-studio
 )
 
 instalar_yay () {
