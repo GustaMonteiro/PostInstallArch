@@ -63,3 +63,9 @@ exports_e_sources () {
   echo "source $ZSH_PLUGINS_PATH/fast-syntax-highlighting/F-Sy-H.plugin.zsh" >> $ZSHRC
   chsh -s $(which zsh)
 }
+
+instalar_yay
+instalar_pacotes
+instalar_lunarvim
+instalar_zsh
+exports_e_sources
