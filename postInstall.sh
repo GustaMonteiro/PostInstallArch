@@ -30,6 +30,8 @@ LISTA_PROGRAMAS=(
   visual-studio-code-bin
   obs-studio
   notion-app
+  xclip
+  ctags
 )
 
 LISTA_PACOTES_CARGO=(
