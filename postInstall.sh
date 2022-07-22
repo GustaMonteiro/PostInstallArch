@@ -32,6 +32,12 @@ LISTA_PROGRAMAS=(
   notion-app
   xclip
   ctags
+  kdenlive
+  breeze
+  youtube-dl
+  speedtest-cli
+  tree
+  onlyoffice-bin
 )
 
 LISTA_PACOTES_CARGO=(
