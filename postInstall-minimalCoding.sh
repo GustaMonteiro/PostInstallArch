@@ -6,12 +6,6 @@ ZSHRC="$HOME/.zshrc"
 
 LISTA_PROGRAMAS=(
   google-chrome
-  spotify
-  sublime-text
-  texlive-most
-  texmaker
-  geogebra
-  flatpak
   neovim
   git
   yarn
@@ -22,21 +16,10 @@ LISTA_PROGRAMAS=(
   ttf-meslo-nerd-font-powerlevel10k
   powerline-fonts
   awesome-terminal-fonts
-  discord
-  zoom
-  vlc
-  gimp
   visual-studio-code-bin
-  obs-studio
-  notion-app
   xclip
   ctags
-  kdenlive
-  breeze
-  youtube-dl
-  speedtest-cli
   tree
-  onlyoffice-bin
 )
 
 LISTA_PACOTES_CARGO=(
