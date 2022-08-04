@@ -1,10 +1,13 @@
 # Post Install Arch Linux
 
 ### Usage
-To set up the PC, run the following command in the terminal:
+To set up the PC, just run the following command in your terminal:
 
-    sudo pacman -S git --noconfirm --needed && git clone https://github.com/GustaMonteiro/PostInstallArch ~/Downloads/PostInstallArch && cd ~/Downloads/PostInstallArch && ./postInstall.sh
-
-If you want the minimal coding version:
-
-    sudo pacman -S git --noconfirm --needed && git clone https://github.com/GustaMonteiro/PostInstallArch ~/Downloads/PostInstallArch && cd ~/Downloads/PostInstallArch && ./postInstall-minimalCoding.sh
+    bash <(curl -s https://github.com/GustaMonteiro/PostInstallArch/blob/main/postInstall.sh)
+    
+### Flags
+You can pass some flags to install less or more programs:
+- --clone
+    - Clone the repository to your PC
+- --minimal
+    - Installs just Zsh, LunarVim and tools for codding
