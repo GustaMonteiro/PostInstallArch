@@ -1,19 +1,32 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+for i in "$@"
+do
+    case $i in
+        --clone)
+            CLONE=true
+            shift
+            ;;
+        --minimal)
+            MINIMAL=true
+            shift
+            ;;
+        *)
+            echo "Unknown option: $i"
+            exit 1
+            shift
+            ;;
+    esac
+done
 
 ZSH_PLUGINS_PATH="$HOME/.zsh-plugins"
+MY_PROJECTS_PATH="$HOME/workspace/my-projects"
 TEMPORARY_CLONE_PATH="/tmp"
 ZSHRC="$HOME/.zshrc"
 
-LISTA_PROGRAMAS=(
+LISTA_PROGRAMAS_MINIMAL=(
   google-chrome
-  spotify
-  sublime-text
-  texlive-most
-  texmaker
-  geogebra
-  flatpak
   neovim
-  git
   yarn
   npm
   rust
@@ -22,20 +35,29 @@ LISTA_PROGRAMAS=(
   ttf-meslo-nerd-font-powerlevel10k
   powerline-fonts
   awesome-terminal-fonts
+  visual-studio-code-bin
+  xclip
+  ctags
+  tree
+)
+
+LISTA_PROGRAMAS_OPTIONAL=(
+  spotify
+  sublime-text
+  texlive-most
+  texmaker
+  geogebra
+  flatpak
   discord
   zoom
   vlc
   gimp
-  visual-studio-code-bin
   obs-studio
   notion-app
-  xclip
-  ctags
   kdenlive
   breeze
   youtube-dl
   speedtest-cli
-  tree
   onlyoffice-bin
 )
 
@@ -54,8 +76,12 @@ instalar_yay () {
   cd
 }
 
-instalar_pacotes () {
-  yay -S ${LISTA_PROGRAMAS[@]} --noconfirm
+instalar_pacotes_minimal () {
+  yay -S ${LISTA_PROGRAMAS_MINIMAL[@]} --noconfirm
+}
+
+instalar_pacotes_optional () {
+  yay -S ${LISTA_PROGRAMAS_OPTIONAL[@]} --noconfirm
 }
 
 instalar_lunarvim () {
@@ -80,13 +106,23 @@ instalar_pacotes_cargo () {
 }
 
 # Ensure that base-devel is installed
-sudo pacman -S base-devel --noconfirm --needed
+sudo pacman -S base-devel git --noconfirm --needed
 
 instalar_yay
-instalar_pacotes
+instalar_pacotes_minimal
+
+if [ -z "$MINIMAL" ]; then
+  instalar_pacotes_optional
+fi
+
 instalar_lunarvim
 instalar_zsh
 exports_e_sources
 instalar_pacotes_cargo
+
+if [ "$CLONE" ]; then
+    mkdir -p $MY_PROJECTS_PATH
+    git clone https://github.com/GustaMonteiro/PostInstallArch.git $MY_PROJECTS_PATH/PostInstallArch
+fi
 
 chsh -s $(which zsh)
