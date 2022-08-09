@@ -12,7 +12,7 @@ do
             shift
             ;;
         *)
-            echo "Unknown option: $i"
+            echo "Opcao desconhecida: $i"
             exit 1
             shift
             ;;
@@ -24,40 +24,46 @@ MY_PROJECTS_PATH="$HOME/workspace/my-projects"
 TEMPORARY_CLONE_PATH="/tmp"
 ZSHRC="$HOME/.zshrc"
 
-LISTA_PROGRAMAS_MINIMAL=(
-  google-chrome
+LISTA_PROGRAMAS_MINIMAL_PACMAN=(
   neovim
   yarn
   npm
   rust
   zsh
-  zsh-theme-powerlevel10k-git
-  ttf-meslo-nerd-font-powerlevel10k
   powerline-fonts
   awesome-terminal-fonts
-  visual-studio-code-bin
   xclip
   ctags
   tree
 )
 
-LISTA_PROGRAMAS_OPTIONAL=(
-  spotify
+LISTA_PROGRAMAS_MINIMAL_AUR=(
+  google-chrome
+  zsh-theme-powerlevel10k-git
+  ttf-meslo-nerd-font-powerlevel10k
+  visual-studio-code-bin
+)
+
+LISTA_PROGRAMAS_OPCIONAL_PACMAN=(
   sublime-text
   texlive-most
   texmaker
   geogebra
   flatpak
   discord
-  zoom
   vlc
   gimp
   obs-studio
-  notion-app
   kdenlive
   breeze
   youtube-dl
   speedtest-cli
+)
+
+LISTA_PROGRAMAS_OPCIONAL_AUR=(
+  spotify
+  zoom
+  notion-app
   onlyoffice-bin
 )
 
@@ -66,6 +72,10 @@ LISTA_PACOTES_CARGO=(
   git-delta
   bat
 )
+
+atualizar_tudo () {
+  sudo pacman -Syyuu --noconfirm --needed
+}
 
 instalar_yay () {
   cd /tmp
@@ -77,11 +87,13 @@ instalar_yay () {
 }
 
 instalar_pacotes_minimal () {
-  yay -S ${LISTA_PROGRAMAS_MINIMAL[@]} --noconfirm
+  sudo pacman -S ${LISTA_PROGRAMAS_MINIMAL_PACMAN[@]} --noconfirm
+  yay -S ${LISTA_PROGRAMAS_MINIMAL_AUR[@]} --noconfirm
 }
 
-instalar_pacotes_optional () {
-  yay -S ${LISTA_PROGRAMAS_OPTIONAL[@]} --noconfirm
+instalar_pacotes_opcional () {
+  sudo pacman -S ${LISTA_PROGRAMAS_OPCIONAL_PACMAN[@]} --noconfirm
+  yay -S ${LISTA_PROGRAMAS_OPCIONAL_AUR[@]} --noconfirm
 }
 
 instalar_lunarvim () {
@@ -105,20 +117,27 @@ instalar_pacotes_cargo () {
   cargo install ${LISTA_PACOTES_CARGO[@]} 
 }
 
-# Ensure that base-devel is installed
+# Inicio das funcoes
+
+atualizar_tudo
+
+# Garantir que o necessario para o yay esteja instalado
 sudo pacman -S base-devel git --noconfirm --needed
 
 instalar_yay
 instalar_pacotes_minimal
 
 if [ -z "$MINIMAL" ]; then
-  instalar_pacotes_optional
+  instalar_pacotes_opcional
 fi
 
 instalar_lunarvim
 instalar_zsh
 exports_e_sources
-instalar_pacotes_cargo
+
+if [ -z "$MINIMAL" ]; then
+  instalar_pacotes_cargo
+fi
 
 if [ "$CLONE" ]; then
     mkdir -p $MY_PROJECTS_PATH
