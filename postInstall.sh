@@ -45,7 +45,6 @@ LISTA_PROGRAMAS_MINIMAL_AUR=(
 )
 
 LISTA_PROGRAMAS_OPCIONAL_PACMAN=(
-  sublime-text
   texlive-most
   texmaker
   geogebra
@@ -65,6 +64,7 @@ LISTA_PROGRAMAS_OPCIONAL_AUR=(
   zoom
   notion-app
   onlyoffice-bin
+  sublime-text-4
 )
 
 LISTA_PACOTES_CARGO=(
