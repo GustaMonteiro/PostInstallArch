@@ -3,10 +3,10 @@
 for i in "$@"
 do
     case $i in
-        --clone)
-            CLONE=true
-            shift
-            ;;
+        # --clone)
+        #     CLONE=true
+        #     shift
+        #     ;;
         --minimal)
             MINIMAL=true
             shift
@@ -35,6 +35,7 @@ LISTA_PROGRAMAS_MINIMAL_PACMAN=(
   xclip
   ctags
   tree
+  kitty
 )
 
 LISTA_PROGRAMAS_MINIMAL_AUR=(
@@ -139,9 +140,11 @@ if [ -z "$MINIMAL" ]; then
   instalar_pacotes_cargo
 fi
 
-if [ "$CLONE" ]; then
-    mkdir -p $MY_PROJECTS_PATH
-    git clone https://github.com/GustaMonteiro/PostInstallArch.git $MY_PROJECTS_PATH/PostInstallArch
-fi
+# if [ "$CLONE" ]; then
+#     mkdir -p $MY_PROJECTS_PATH
+#     git clone https://github.com/GustaMonteiro/PostInstallArch.git $MY_PROJECTS_PATH/PostInstallArch
+# fi
+
+cp gitconfig $HOME/.gitconfig
 
 chsh -s $(which zsh)
